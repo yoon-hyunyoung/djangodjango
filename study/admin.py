@@ -1,6 +1,6 @@
 from django.contrib import admin
 from .models import Students, Scores
-# Register your models here.
+# Register your models here.``
 @admin.register(Students)
 class StudentAdmin(admin.ModelAdmin):
     list_display = ['name', 'address', 'email']
@@ -8,3 +8,4 @@ class StudentAdmin(admin.ModelAdmin):
 @admin.register(Scores)
 class ScoreAdmin(admin.ModelAdmin):
     list_display = ['name', 'math', 'science', 'english']
+    list_display_links = ['name', 'math', 'science', 'english']
