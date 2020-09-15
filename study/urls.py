@@ -6,6 +6,7 @@ router = DefaultRouter()
 router.register('students', views.StudentView),
 router.register('scores', views.ScoreView)
 
+
 urlpatterns = [
     path('', include(router.urls))
     # path('students/', views.StudentView),

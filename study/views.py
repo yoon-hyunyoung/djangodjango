@@ -1,30 +1,98 @@
 from django.shortcuts import render, get_object_or_404
+from django.http import Http404
 from rest_framework import status, viewsets
-from rest_framework.decorators import api_view
+from rest_framework.viewsets import ModelViewSet, ReadOnlyModelViewSet
+from rest_framework.decorators import api_view, action
 from rest_framework.views import APIView
 from .models import Students, Scores
 from .serializers import StudentSerializer, ScoreSerializer
 from rest_framework.response import Response
 
-class StudentView(viewsets.ReadOnlyModelViewSet):
-    queryset = Students.objects.all()
-    serializer_class = StudentSerializer
-
-class ScoreView(viewsets.ReadOnlyModelViewSet):
-    queryset = Scores.objects.all()
-    serializer_class = ScoreSerializer
-
-
-
-
-
-# class StudentView(viewsets.ModelViewSet):
+# class StudentView(viewsets.ReadOnlyModelViewSet):
 #     queryset = Students.objects.all()
 #     serializer_class = StudentSerializer
 
-# class ScoreView(viewsets.ModelViewSet):
+# class ScoreView(viewsets.ReadOnlyModelViewSet):
 #     queryset = Scores.objects.all()
 #     serializer_class = ScoreSerializer
+
+
+
+
+
+class StudentView(viewsets.ModelViewSet):
+    queryset = Students.objects.all()
+    serializer_class = StudentSerializer
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        name = self.request.query_params.get('name')
+        if name:
+            qs = qs.filter(name=name)
+        return qs
+    @action(detail=False, methods=['GET'])
+    def seoul(self, request):
+        qs = self.get_queryset().filter(address__contains='서울')
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
+
+    @action(detail=True, methods=['PUT'])
+    def init(self, request, pk):
+        instance = self.get_object()
+        instance.address = ""
+        instance.email = ""
+        instance.save(update_fields=['address', 'email'])
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
+class ScoreView(ModelViewSet):
+    queryset = Scores.objects.all() #전체데이터를 조회하는
+    serializer_class = ScoreSerializer
+
+    # 오버라이딩
+    def get_queryset(self):
+        #Scores.objects.all()
+        qs = super().get_queryset() # SELECT * FROM scores
+
+        name = self.request.query_params.get('name')
+        math = self.request.query_params.get('math')
+        science = self.request.query_params.get('science')
+        english = self.request.query_params.get('english')
+        order = self.request.query_params.get('order')
+
+        if name:
+            qs = qs.filter(name=name) # SELECT * FROM scores WHERE name = name
+        if math:
+            qs = qs.filter(math__gte=math)
+        if science:
+            qs = qs.filter(math__gte=science)
+        if english:
+            qs = qs.filter(math__gte=english)
+        if order:
+            qs = qs.order_by(order)
+
+        return qs
+
+    #PUT, DETAIL GET, DELETE (PK)
+    #LIST, LIST 0, 1, >=
+    @action(detail=False, methods=['GET'])
+    def top(self, request):
+        qs = self.get_queryset().filter(math__gte=80, english__gte=80, science__gte=80)
+        #ScoreSerializer
+        serializer = self.get_serializer(qs, many=True)
+        return Response(serializer.data)
+
+
+
+
+    # def science(self, request):
+    #     qs = self.get_queryset().filter(science__gte=80)
+    #     serializer = self.get_serializer(qs, many=True)
+    #     return Response(serializer.data)
+    # def english(self, request):
+    #     qs = self.get_queryset().filter(english__gte=80)
+    #     serializer = self.get_serializer(qs, many=True)
+    #     return Response(serializer.data)
 
 # class StudentView(APIView):
 #     def get(self, request):
