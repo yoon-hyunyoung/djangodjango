@@ -6,13 +6,25 @@ from .models import Students, Scores
 from .serializers import StudentSerializer, ScoreSerializer
 from rest_framework.response import Response
 
-class StudentView(viewsets.ModelViewSet):
+class StudentView(viewsets.ReadOnlyModelViewSet):
     queryset = Students.objects.all()
     serializer_class = StudentSerializer
 
-class ScoreView(viewsets.ModelViewSet):
+class ScoreView(viewsets.ReadOnlyModelViewSet):
     queryset = Scores.objects.all()
     serializer_class = ScoreSerializer
+
+
+
+
+
+# class StudentView(viewsets.ModelViewSet):
+#     queryset = Students.objects.all()
+#     serializer_class = StudentSerializer
+
+# class ScoreView(viewsets.ModelViewSet):
+#     queryset = Scores.objects.all()
+#     serializer_class = ScoreSerializer
 
 # class StudentView(APIView):
 #     def get(self, request):
