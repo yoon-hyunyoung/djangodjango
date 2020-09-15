@@ -10,7 +10,9 @@ class StudentView(viewsets.ModelViewSet):
     queryset = Students.objects.all()
     serializer_class = StudentSerializer
 
-
+class ScoreView(viewsets.ModelViewSet):
+    queryset = Scores.objects.all()
+    serializer_class = ScoreSerializer
 
 # class StudentView(APIView):
 #     def get(self, request):
