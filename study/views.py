@@ -1,44 +1,50 @@
 from django.shortcuts import render, get_object_or_404
-from rest_framework import status
+from rest_framework import status, viewsets
 from rest_framework.decorators import api_view
 from rest_framework.views import APIView
 from .models import Students, Scores
 from .serializers import StudentSerializer, ScoreSerializer
 from rest_framework.response import Response
 
-class StudentView(APIView):
-    def get(self, request):
-         qs = Students.objects.all()
-         Serializer = StudentSerializer(qs, many=True)
-         return Response(Serializer.data)
-    def post(self, request):
-        Serializer = StudentSerializer(data=request.data)
-        if Serializer.is_valid():
-            Serializer.save()
-            return Response(Serializer.data, status=status.HTTP_201_CREATED)
-        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+class StudentView(viewsets.ModelViewSet):
+    queryset = Students.objects.all()
+    serializer_class = StudentSerializer
 
-class StudentDetailView(APIView):
-    def get_object(self, pk):
-        return get_object_or_404(Students, pk=pk)
 
-    def get(self, request, pk):
-        qs = self.get_object(pk)
-        Serializer = StudentSerializer(qs)
-        return Response(Serializer.data)
 
-    def put(self, request, pk):
-        qs = self.get_object(pk)
-        Serializer = StudentSerializer(qs, data=request.data)
-        if Serializer.is_valid():
-            Serializer.save()
-            return Response(Serializer.data)
-        return Response(Serializer.errors, status=400)
+# class StudentView(APIView):
+#     def get(self, request):
+#          qs = Students.objects.all()
+#          Serializer = StudentSerializer(qs, many=True)
+#          return Response(Serializer.data)
+#     def post(self, request):
+#         Serializer = StudentSerializer(data=request.data)
+#         if Serializer.is_valid():
+#             Serializer.save()
+#             return Response(Serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def delete(self, request, pk):
-        qs = self.get_object(pk)
-        qs.delete()
-        return Response(status=204)
+# class StudentDetailView(APIView):
+#     def get_object(self, pk):
+#         return get_object_or_404(Students, pk=pk)
+
+#     def get(self, request, pk):
+#         qs = self.get_object(pk)
+#         Serializer = StudentSerializer(qs)
+#         return Response(Serializer.data)
+
+#     def put(self, request, pk):
+#         qs = self.get_object(pk)
+#         Serializer = StudentSerializer(qs, data=request.data)
+#         if Serializer.is_valid():
+#             Serializer.save()
+#             return Response(Serializer.data)
+#         return Response(Serializer.errors, status=400)
+
+#     def delete(self, request, pk):
+#         qs = self.get_object(pk)
+#         qs.delete()
+#         return Response(status=204)
 
 
 #@api_view(['GET', 'POST'])
@@ -74,39 +80,39 @@ class StudentDetailView(APIView):
 #         qs.delete()
 #         return Response(status=404)
 
-class ScoreView(APIView):
-    def get(self, request):
-        sc = Scores.objects.all()
-        Serializer = ScoreSerializer(sc, many=True)
-        return Response(Serializer.data)
-    def post(self, request):
-        Serializer = ScoreSerializer(data=request.data)
-        if Serializer.is_valid():
-            Serializer.save()
-            return Response(Serializer.data, status=status.HTTP_201_CREATED)
-        return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+# class ScoreView(APIView):
+#     def get(self, request):
+#         sc = Scores.objects.all()
+#         Serializer = ScoreSerializer(sc, many=True)
+#         return Response(Serializer.data)
+#     def post(self, request):
+#         Serializer = ScoreSerializer(data=request.data)
+#         if Serializer.is_valid():
+#             Serializer.save()
+#             return Response(Serializer.data, status=status.HTTP_201_CREATED)
+#         return Response(Serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-class ScoreDetailView(APIView):
-    def get_object(self, pk):
-        return get_object_or_404(Scores, pk=pk)
+# class ScoreDetailView(APIView):
+#     def get_object(self, pk):
+#         return get_object_or_404(Scores, pk=pk)
 
-    def get(self, request, pk):
-        sc = self.get_object(pk)
-        Serializer = ScoreSerializer(sc)
-        return Response(Serializer.data)
+#     def get(self, request, pk):
+#         sc = self.get_object(pk)
+#         Serializer = ScoreSerializer(sc)
+#         return Response(Serializer.data)
 
-    def put(self, request, pk):
-        sc = self.get_object(pk)
-        Serializer = ScoreSerializer(sc, data=request.data)
-        if Serializer.is_valid():
-            Serializer.save()
-            return Response(Serializer.data)
-        return Response(Serializer.errors, status=400)
+#     def put(self, request, pk):
+#         sc = self.get_object(pk)
+#         Serializer = ScoreSerializer(sc, data=request.data)
+#         if Serializer.is_valid():
+#             Serializer.save()
+#             return Response(Serializer.data)
+#         return Response(Serializer.errors, status=400)
 
-    def delete(self, request, pk):
-        sc = self.get_object(pk)
-        sc.delete()
-        return Response(status=204)
+#     def delete(self, request, pk):
+#         sc = self.get_object(pk)
+#         sc.delete()
+#         return Response(status=204)
 
 
 
