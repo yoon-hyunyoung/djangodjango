@@ -8,7 +8,10 @@ router.register('scores', views.ScoreView)
 
 
 urlpatterns = [
-    path('', include(router.urls))
+    path('', include(router.urls)),
+    path('test', views.StudentBasicView),
+    path('test/<pk>', views.StudentDetailBasicView),
+    path('testscore/', views.ScoreBasicView)
     # path('students/', views.StudentView),
     # path('students/<int:id>', views.StudentDetailView),
     # path('scores/', views.ScoreView),
