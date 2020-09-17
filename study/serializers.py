@@ -2,6 +2,7 @@ from rest_framework.serializers import ModelSerializer, Serializer
 from rest_framework import serializers
 from .models import Students, Scores
 from django.contrib.auth import get_user_model
+from rest_framework.validators import ValidationError
 
 class UserSerializer(ModelSerializer):
     
@@ -29,10 +30,28 @@ class ScoreSerializer(ModelSerializer):
     reg_user_username = serializers.ReadOnlyField(source='reg_user.username')
     reg_user_email = serializers.ReadOnlyField(source='reg_user.email')
     reg_user_phone_number = serializers.ReadOnlyField(source='reg_user.phone_number')
-
+    
     class Meta:
         model = Scores
-        fields = ['name', 'math', 'science', 'english', 'reg_user_username', 'reg_user_email', 'reg_user_phone_number']
+        fields = ['name', 'math', 'science', 'english', 'reg_user', 'reg_user_username', 'reg_user_email', 'reg_user_phone_number']
+    
+    def validate_math(self, math):
+        if not(0 <= math <= 100):
+            raise ValidationError("0~100 사이만 입력해주세요!")
+        return math
+    def validate_science(self, science):
+        if not(0 <= science <= 100):
+            raise ValidationError("0~100 사이만 입력해주세요!")
+        return science
+    def validate_english(self, english):
+        if not(0 <= english <= 100):
+            raise ValidationError("0~100 사이만 입력해주세요!")
+        return english
+
+    # def validate(self, data):
+    #     if len(data['name']) < 3:
+    #         raise ValidationError("3글자 이상 입력하시오!!")
+    #     return data
             
         
 
