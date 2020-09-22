@@ -1,10 +1,10 @@
-from rest_framework_jwt.serializers import ModelSerializer
+from rest_framework.serializers import ModelSerializer
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
 User = get_user_model
 
-class SingupSerializer(ModelSerializer):
+class SignupSerializer(ModelSerializer):
     password = serializers.CharField(write_only=True)
     class Meta:
         model = User

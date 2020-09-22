@@ -7,7 +7,7 @@ from .models import User
 @api_view(['GET','POST'])
 def signUp(request):
     if request.method == 'POST':
-        signup = SingupSerializer(data=request.data)
+        signup = SignupSerializer(data=request.data)
         if signup.is_valid():
             signup.save()
             return Response(signup.data, status=201)
