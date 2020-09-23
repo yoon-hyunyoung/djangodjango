@@ -2,6 +2,6 @@ from . import views
 from django.urls import path, include
 
 urlpatterns = [
-    path('', views.Students, name='Students')
+    path('epl/', views.EPLView, name='EPL')
 ]
 
