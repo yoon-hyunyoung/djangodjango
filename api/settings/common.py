@@ -42,7 +42,8 @@ INSTALLED_APPS = [
     'corsheaders',
     #app
     'account',
-    'study'
+    'study',
+    'yoonproject'
 ]
 
 AUTH_USER_MODEL="account.USER"
