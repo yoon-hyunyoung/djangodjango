@@ -21,7 +21,7 @@ class StudentSerializer(ModelSerializer):
         return obj.address + " (" + obj.name + ")"
     class Meta:
         model = Students
-        fields = ['name', 'address', 'email', 'memo', 'reg_user', 'reg_user_username', 'reg_user_email', 'reg_user', 'test']
+        fields = ['id','name', 'address', 'email', 'memo', 'reg_user', 'reg_user_username', 'reg_user_email', 'reg_user', 'test']
 
 
 
@@ -33,7 +33,7 @@ class ScoreSerializer(ModelSerializer):
     
     class Meta:
         model = Scores
-        fields = ['name', 'math', 'science', 'english', 'reg_user', 'reg_user_username', 'reg_user_email', 'reg_user_phone_number']
+        fields = ['id','name', 'math', 'science', 'english', 'reg_user', 'reg_user_username', 'reg_user_email', 'reg_user_phone_number']
     
     def validate_math(self, math):
         if not(0 <= math <= 100):
