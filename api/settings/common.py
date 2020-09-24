@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     #app
     'account',
     'study',
-    'yoonproject'
+    'yoonproject',
 ]
 
 AUTH_USER_MODEL="account.USER"

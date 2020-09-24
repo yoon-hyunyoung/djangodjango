@@ -7,6 +7,8 @@ class EPLGroup(models.Model):
     name = models.CharField(max_length=50)
     reg_date = models.DateTimeField(auto_now_add=True)
     del_yn = models.BooleanField(default=False)
+    def __str__(self):
+        return self.name
 # 1,2,3부 리그 status 팀들
 class EPL(models.Model):
     seq = models.AutoField(primary_key=True)
@@ -16,16 +18,21 @@ class EPL(models.Model):
     end_date = models.DateField(blank=True)
     del_yn = models.BooleanField(default=False)
     group = models.ForeignKey(EPLGroup, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
 # 즐겨찾기
-# class BigmatchGroup(models.Model):
-#     seq = models.AutoField(primary_key=True)
-#     name = models.CharField(max_length=50)
-#     reg_date = models.DateTimeField(auto_now_add=True)
-
-# class Bigmatch(models.Model):
-#     seq = models.AutoField(primary_key=True)
-#     name = models.CharField(max_length=50)
-#     url = models.CharField(max_length=100)
-#     memo = models.TextField()
-#     reg_date = models.DateTimeField(auto_now_add=True)
-#     group = models.ForeignKey(BigmatchGroup, on_delete=models.CASCADE)
+class BigmatchGroup(models.Model):
+    seq = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    reg_date = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+        return self.name
+class Bigmatch(models.Model):
+    seq = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=50)
+    url = models.CharField(max_length=100)
+    memo = models.TextField()
+    reg_date = models.DateTimeField(auto_now_add=True)
+    group = models.ForeignKey(BigmatchGroup, on_delete=models.CASCADE)
+    def __str__(self):
+        return self.name
