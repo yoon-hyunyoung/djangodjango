@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "@ant-design/icons": "^4.2.2",
+    "antd": "^4.6.5",
     "axios": "^0.20.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "yarn": "^1.22.5"
   }
 }
