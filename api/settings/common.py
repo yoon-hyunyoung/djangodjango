@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     #installed
     'rest_framework',
     'corsheaders',
+    
     #app
     'account',
     'study',
@@ -132,16 +133,20 @@ STATIC_URL = '/static/'
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES':[
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework_jwt.authentication.JSONWebTokenAuthentication'
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
 }
 
-JWT_AUTH = {
-    # "JWT_ALGORITHM":"H256",
-    "JWT_EXPIRATION_DELTA":datetime.timedelta(days=30),
-    # "JWT_ALLOW_REFRASH": False,
-    # "JWT_REFRESH_EXPIRATION_DELTA":datetime.timedelta(days=30),
-    # "JWT_SECRET_KEY": "KEY"
-}
+# JWT_AUTH = {
+#     # "JWT_ALGORITHM":"H256",
+#     "JWT_EXPIRATION_DELTA":datetime.timedelta(days=30),
+#     # "JWT_ALLOW_REFRASH": False,
+#     # "JWT_REFRESH_EXPIRATION_DELTA":datetime.timedelta(days=30),
+#     # "JWT_SECRET_KEY": "KEY"
+# }
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+TIME_ZONE = 'Asia/Seoul'
+
