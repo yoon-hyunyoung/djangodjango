@@ -12,6 +12,7 @@ class UserSerializer(ModelSerializer):
 
 
 class EPLSerializer(ModelSerializer):
+    group_name = serializers.ReadOnlyField(source='group.name')
     class Meta:
         model = EPL
         fields = '__all__'
@@ -22,6 +23,7 @@ class EPLGroupSerializer(ModelSerializer):
         fields = '__all__'
 
 class BigmatchSerializer(ModelSerializer):
+    group_name = serializers.ReadOnlyField(source='group.name')
     class Meta:
         model = Bigmatch
         fields = '__all__'
