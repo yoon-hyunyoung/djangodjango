@@ -4,7 +4,7 @@ from .models import EPL, EPLGroup, Bigmatch, BigmatchGroup
 # Register your models here.``
 @admin.register(EPL)
 class EPLAdmin(admin.ModelAdmin):
-    list_display = ['name', 'status', 'reg_date', 'end_date', 'del_yn', 'group']
+    list_display = ['name', 'status', 'reg_date', 'end_date', 'del_yn', 'group', 'win', 'draw','lose','score']
 @admin.register(EPLGroup)
 class EPLGroupAdmin(admin.ModelAdmin):
     list_display = ['name', 'reg_date', 'del_yn']

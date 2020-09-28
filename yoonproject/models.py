@@ -17,11 +17,12 @@ class EPL(models.Model):
     reg_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateField(blank=True)
     del_yn = models.BooleanField(default=False)
+    score = models.IntegerField(blank=True)
+    win = models.IntegerField(blank=True)
+    draw = models.IntegerField(blank=True)
+    lose = models.IntegerField(blank=True)
     group = models.ForeignKey(EPLGroup, on_delete=models.CASCADE)
-    score = models.IntegerField()
-    win = models.IntegerField()
-    draw = models.IntegerField()
-    lose = models.IntegerField()
+  
     def __str__(self):
         return self.name
 # 즐겨찾기
