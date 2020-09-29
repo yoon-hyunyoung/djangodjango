@@ -2,7 +2,7 @@ from . import views
 from django.urls import path, include
 from rest_framework import routers
 from yoonproject import views
-
+from rest_framework_jwt.views import obtain_jwt_token, refresh_jwt_token, verify_jwt_token
 
 urlpatterns = [
     path('epl/', views.EPLView, name='epl'),
@@ -15,7 +15,8 @@ urlpatterns = [
     path('efl/<int:seq>', views.EFLdeleteView, name='efl_d'),
     path('eplgroup/', views.EPLGroupView, name='eplgroup'),
     path('eplallselectview/', views.EPLAllSelectView, name='eplallselectview'),
-
-
+    path('eplallselectview/<int:seq>', views.EPLAllSelectDeleteView, name='eplallselectview_d'),
     
-]
+    
+    
+    ]

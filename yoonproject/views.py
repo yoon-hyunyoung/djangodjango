@@ -6,9 +6,15 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import EPL, EPLGroup, Bigmatch
 from django.urls import path, include
+@api_view(['DELETE'])
+def EPLAllSelectDeleteView(request, seq):
+        data = EPL.objects.get(seq=seq)
+        if request.method == 'DELETE':
+            data.delete()
+            return Response()
 
 
-@api_view(['GET', 'POST', 'DELETE'])
+@api_view(['GET', 'POST','DELETE'])
 def EPLAllSelectView(request):
     if request.method == 'GET':
         data = EPL.objects.all()
@@ -27,11 +33,9 @@ def EPLAllSelectView(request):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
-    elif request.method == 'DELETE':
-            data.delete()
-            return Response()
+    
 
-@api_view(['GET','POST', 'DELETE'])
+@api_view(['GET','POST'])
 def EPLGroupView(request):
     if request.method == 'GET':
         data = EPLGroup.objects.all()
@@ -47,7 +51,7 @@ def EPLGroupView(request):
             data.delete()
             return Response()
 
-@api_view(['GET','POST', 'DELETE'])
+@api_view(['GET','POST'])
 def EPLView(request):
     if request.method == 'GET':
         data = EPL.objects.filter(status="EPL")
@@ -59,11 +63,9 @@ def EPLView(request):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
-    elif request.method == 'DELETE':
-            data.delete()
-            return Response()
+    
 
-@api_view(['GET','POST', 'DELETE'])
+@api_view(['GET','POST'])
 def EFLView(request):
     if request.method == 'GET':
         data = EPL.objects.filter(status="EFL")
@@ -75,11 +77,9 @@ def EFLView(request):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
-    elif request.method == 'DELETE':
-            data.delete()
-            return Response()
+    
 
-@api_view(['GET','POST', 'DELETE'])
+@api_view(['GET','POST'])
 def LEAGUE1View(request):
     if request.method == 'GET':
         data = EPL.objects.filter(status="리그1")
@@ -91,9 +91,7 @@ def LEAGUE1View(request):
             serializer.save()
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
-    elif request.method == 'DELETE':
-            data.delete()
-            return Response()
+    
 
 @api_view(['GET','POST'])
 def BigmatchView(request):
