@@ -9,11 +9,16 @@ class EPLGroup(models.Model):
     del_yn = models.BooleanField(default=False)
     def __str__(self):
         return self.name
+
+CHOICE = [
+    ("EPL","EPL"),("EFL","EFL"),("리그1","리그1")
+]
+        
 # 1,2,3부 리그 status 팀들
 class EPL(models.Model):
     seq = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
-    status = models.CharField(max_length=10)
+    status = models.CharField(max_length=10, choices=CHOICE)
     reg_date = models.DateTimeField(auto_now_add=True)
     end_date = models.DateField(blank=True)
     del_yn = models.BooleanField(default=False)

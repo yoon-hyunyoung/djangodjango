@@ -11,6 +11,11 @@ urlpatterns = [
     path('bigmatch/', views.BigmatchView, name='bigmatch'),
     path('bigmatch/<int:seq>', views.BigmatchdeleteView, name='bigmatch_d'),
     path('league1/<int:seq>', views.LEAGUE1deleteView, name='league1_d'),
-    path('epl/<int:seq>', views.EPLdeleteView, name='epl'),
-    path('efl/<int:seq>', views.EFLdeleteView, name='efl'),
+    path('epl/<int:seq>', views.EPLdeleteView, name='epl_d'),
+    path('efl/<int:seq>', views.EFLdeleteView, name='efl_d'),
+    path('eplgroup/', views.EPLGroupView, name='eplgroup'),
+    path('eplallselectview/', views.EPLAllSelectView, name='eplallselectview'),
+
+
+    
 ]

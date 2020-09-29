@@ -16,11 +16,14 @@ class EPLSerializer(ModelSerializer):
     class Meta:
         model = EPL
         fields = '__all__'
-
+        labels  = {     
+        'group':'연고지'
+        }
 class EPLGroupSerializer(ModelSerializer):
     class Meta:
         model = EPLGroup
         fields = '__all__'
+        
 
 class BigmatchSerializer(ModelSerializer):
     group_name = serializers.ReadOnlyField(source='group.name')
