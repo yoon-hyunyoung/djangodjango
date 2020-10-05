@@ -1,11 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
 from .serializers import EPLSerializer ,EPLGroupSerializer, BigmatchSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from .models import EPL, EPLGroup, Bigmatch
 from django.urls import path, include
+from rest_framework.permissions import IsAuthenticated
+
 @api_view(['DELETE'])
 def EPLAllSelectDeleteView(request, seq):
         data = EPL.objects.get(seq=seq)
@@ -15,6 +17,7 @@ def EPLAllSelectDeleteView(request, seq):
 
 
 @api_view(['GET', 'POST','DELETE'])
+# @permission_classes([IsAuthenticated])
 def EPLAllSelectView(request):
     if request.method == 'GET':
         data = EPL.objects.all()
