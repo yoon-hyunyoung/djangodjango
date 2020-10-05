@@ -17,7 +17,7 @@ def EPLAllSelectDeleteView(request, seq):
 
 
 @api_view(['GET', 'POST','DELETE'])
-# @permission_classes([IsAuthenticated])
+@permission_classes([IsAuthenticated])
 def EPLAllSelectView(request):
     if request.method == 'GET':
         data = EPL.objects.all()
@@ -113,24 +113,28 @@ def BigmatchView(request):
         return Response(serializer.errors, status=400)
 
 @api_view(['GET', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def BigmatchdeleteView(request, seq):
         s = Bigmatch.objects.get(seq=seq)
         if request.method == 'DELETE':
             s.delete()
             return Response()
 @api_view(['GET', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def LEAGUE1deleteView(request, seq):
         s = Bigmatch.objects.get(seq=seq)
         if request.method == 'DELETE':
             s.delete()
             return Response()           
 @api_view(['GET', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def EFLdeleteView(request, seq):
         s = Bigmatch.objects.get(seq=seq)
         if request.method == 'DELETE':
             s.delete()
             return Response() 
 @api_view(['GET', 'DELETE'])
+@permission_classes([IsAuthenticated])
 def EPLdeleteView(request, seq):
         s = Bigmatch.objects.get(seq=seq)
         if request.method == 'DELETE':
