@@ -17,6 +17,7 @@ CHOICE = [
 # 1,2,3부 리그 status 팀들
 class EPL(models.Model):
     seq = models.AutoField(primary_key=True)
+    image = models.ImageField(null=True, upload_to='%Y/%m')
     name = models.CharField(max_length=50)
     status = models.CharField(max_length=10, choices=CHOICE)
     reg_date = models.DateTimeField(auto_now_add=True)

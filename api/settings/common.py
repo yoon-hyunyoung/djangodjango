@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import datetime
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
 
@@ -138,15 +139,17 @@ REST_FRAMEWORK = {
     ]
 }
 
-# JWT_AUTH = {
+JWT_AUTH = {
 #     # "JWT_ALGORITHM":"H256",
-#     "JWT_EXPIRATION_DELTA":datetime.timedelta(days=30),
+     "JWT_EXPIRATION_DELTA":datetime.timedelta(days=30),
 #     # "JWT_ALLOW_REFRASH": False,
 #     # "JWT_REFRESH_EXPIRATION_DELTA":datetime.timedelta(days=30),
 #     # "JWT_SECRET_KEY": "KEY"
-# }
+}
 
 CORS_ORIGIN_ALLOW_ALL = True
 
 TIME_ZONE = 'Asia/Seoul'
 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

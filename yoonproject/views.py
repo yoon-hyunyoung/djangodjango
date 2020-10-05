@@ -9,6 +9,7 @@ from django.urls import path, include
 from rest_framework.permissions import IsAuthenticated
 
 @api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def EPLAllSelectDeleteView(request, seq):
         data = EPL.objects.get(seq=seq)
         if request.method == 'DELETE':
@@ -16,7 +17,7 @@ def EPLAllSelectDeleteView(request, seq):
             return Response()
 
 
-@api_view(['GET', 'POST','DELETE'])
+@api_view(['GET', 'POST'])
 @permission_classes([IsAuthenticated])
 def EPLAllSelectView(request):
     if request.method == 'GET':
@@ -39,6 +40,7 @@ def EPLAllSelectView(request):
     
 
 @api_view(['GET','POST'])
+
 def EPLGroupView(request):
     if request.method == 'GET':
         data = EPLGroup.objects.all()
@@ -55,6 +57,7 @@ def EPLGroupView(request):
             return Response()
 
 @api_view(['GET','POST'])
+
 def EPLView(request):
     if request.method == 'GET':
         data = EPL.objects.filter(status="EPL")
@@ -69,6 +72,7 @@ def EPLView(request):
     
 
 @api_view(['GET','POST'])
+
 def EFLView(request):
     if request.method == 'GET':
         data = EPL.objects.filter(status="EFL")
@@ -83,6 +87,7 @@ def EFLView(request):
     
 
 @api_view(['GET','POST'])
+
 def LEAGUE1View(request):
     if request.method == 'GET':
         data = EPL.objects.filter(status="리그1")
@@ -97,6 +102,7 @@ def LEAGUE1View(request):
     
 
 @api_view(['GET','POST'])
+
 def BigmatchView(request):
     if request.method == 'GET':
         d = Bigmatch.objects.all()
@@ -113,7 +119,7 @@ def BigmatchView(request):
         return Response(serializer.errors, status=400)
 
 @api_view(['GET', 'DELETE'])
-@permission_classes([IsAuthenticated])
+
 def BigmatchdeleteView(request, seq):
         s = Bigmatch.objects.get(seq=seq)
         if request.method == 'DELETE':
